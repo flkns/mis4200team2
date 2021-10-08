@@ -4,9 +4,20 @@
     src: url("../fonts/OpenSans/OpenSans-Regular.ttf?#iefix") format('truetype'), url("../fonts/OpenSans/OpenSans-Bold.ttf") format('truetype'), url("../fonts/OpenSans/OpenSans-BoldItalic.ttf") format('truetype'), url("../fonts/OpenSans/OpenSans-ExtraBold.ttf") format('truetype'), url("../fonts/OpenSans/OpenSans-ExtraBoldItalic.ttf") format('truetype'), url("../fonts/OpenSans/OpenSans-Italic.ttf") format('truetype'), url("../fonts/OpenSans/OpenSans-Light.ttf") format('truetype'), url("../fonts/OpenSans/OpenSans-LightItalic.ttf") format('truetype'), url("../fonts/OpenSans/OpenSans-Medium.ttf") format('truetype'), url("../fonts/OpenSans/OpenSans-MediumItalic.ttf") format('truetype'), url("../fonts/OpenSans/OpenSans-SemiBold.ttf") format('truetype'), url("../fonts/OpenSans/OpenSans-SemiBoldItalic.ttf") format('truetype');
 }
 
+:root {
+    --font-face: "OpenSans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+    --color-primary: #ffb612;
+    --color-secondary: #2c1a5d;
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-bg: #150c2c;
+    --color-border: #222;
+    --color-brand: #f2ead8;
+}
+
 html,
 body {
-    font-family: 'OpenSans', Arial, sans-serif;
+    font-family: var(--font-face);
 }
 
 body {
@@ -26,6 +37,133 @@ body {
 .dl-horizontal dt {
     white-space: normal;
 }
+
+.navbar-inverse {
+    background-color: var(--color-bg);
+    border-color: var(--color-border);
+}
+
+.navbar-inverse .navbar-brand {
+    color: var(--color-brand);
+}
+
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+    color: var(--color-white);
+    background-color: transparent;
+}
+
+.navbar-inverse .navbar-text {
+    color: var(--color-white);
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #9d9d9d;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+    color: #fff;
+    background-color: transparent;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+    color: #fff;
+    background-color: #080808;
+}
+
+.navbar-inverse .navbar-nav > .disabled > a,
+.navbar-inverse .navbar-nav > .disabled > a:hover,
+.navbar-inverse .navbar-nav > .disabled > a:focus {
+    color: #444;
+    background-color: transparent;
+}
+
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: #080808;
+}
+
+@media (max-width: 767px) {
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
+        border-color: #080808;
+    }
+
+    .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
+        background-color: #080808;
+    }
+
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+        color: #9d9d9d;
+    }
+
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #fff;
+        background-color: transparent;
+    }
+
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #fff;
+        background-color: #080808;
+    }
+
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a,
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+    .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+        color: #444;
+        background-color: transparent;
+    }
+}
+
+.navbar-inverse .navbar-toggle {
+    border-color: #333;
+}
+
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #333;
+}
+
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+    border-color: #101010;
+}
+
+.navbar-inverse .navbar-link {
+    color: #9d9d9d;
+}
+
+.navbar-inverse .navbar-link:hover {
+    color: #fff;
+}
+
+.navbar-inverse .btn-link {
+    color: #9d9d9d;
+}
+
+.navbar-inverse .btn-link:hover,
+.navbar-inverse .btn-link:focus {
+    color: #fff;
+}
+
+.navbar-inverse .btn-link[disabled]:hover,
+fieldset[disabled] .navbar-inverse .btn-link:hover,
+.navbar-inverse .btn-link[disabled]:focus,
+fieldset[disabled] .navbar-inverse .btn-link:focus {
+    color: #444;
+}
+
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
