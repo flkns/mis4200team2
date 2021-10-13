@@ -26,8 +26,14 @@ namespace mis4200team2.Models
             }
         }
 
-        [DataType(DataType.Date), DisplayFormat(DataFormatString="{0:yyyy-MM-dd}", ApplyFormatInEditMode=true), Display(Name="Hire Date")]
+        [Required, DataType(DataType.Date), DisplayFormat(DataFormatString="{0:yyyy-MM-dd}", ApplyFormatInEditMode=true), Display(Name="Hire Date")]
         public DateTime HireDate { get; set; }
+
+        [Required, Display(Name ="Business Unit"), StringLength(50)]
+        public string BusinessUnit { get; set; }
+
+        [Required, Display(Name = "Title"), StringLength(50)]
+        public string Title { get; set; }
 
     }
 }
