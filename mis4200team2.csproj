@@ -193,6 +193,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Centric.png" />
+    <Content Include="Images\columbus-devstudio-deliver.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\OpenSans\OpenSans-Bold.ttf" />
