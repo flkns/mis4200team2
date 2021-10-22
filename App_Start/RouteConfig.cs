@@ -7,7 +7,7 @@ using System.Web.Routing;
 
 namespace mis4200team2
 {
-    public class RouteConfig
+    public static class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
         {

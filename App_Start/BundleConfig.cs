@@ -3,7 +3,7 @@ using System.Web.Optimization;
 
 namespace mis4200team2
 {
-    public class BundleConfig
+    public static class BundleConfig
     {
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
