@@ -171,3 +171,10 @@ select,
 textarea {
     max-width: 280px;
 }
+.jumbotron {
+    background-image: url(../Images/columbus-devstudio-deliver.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.6;
+    
+}
