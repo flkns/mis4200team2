@@ -63,7 +63,6 @@
             </div>
         </div>
 
-        <!--
         <div class="form-group">
             @Html.LabelFor(model => model.BusinessUnit, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -71,7 +70,6 @@
                 @Html.ValidationMessageFor(model => model.BusinessUnit, "", new { @class = "text-danger" })
             </div>
         </div>
-         -->
 
         @{
             DataContext db = new DataContext();
@@ -83,19 +81,19 @@
 
             if (currentEmployee != null)
             {
-                bool isAuthorized = currentEmployee.BusinessUnit == Employee.BusinessUnits.admin;
+                bool isAuthorized = currentEmployee.Role == Employee.Roles.admin;
 
                 if (isAuthorized)
                 {
                     <dib class="form-group">
-                        @Html.LabelFor(model => model.BusinessUnit, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EnumDropDownListFor(model => model.BusinessUnit, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.BusinessUnit, "", new { @class = "text-danger" })
+                            @Html.EnumDropDownListFor(model => model.Role, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
                         </div>
                     </dib>
                 } else {
-                        @Html.HiddenFor(model => model.BusinessUnit, new { Value = @Model.BusinessUnit })
+                        @Html.HiddenFor(model => model.Role, new { Value = @Model.Role })
                 }
             }
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -18,9 +19,46 @@ namespace mis4200team2.Controllers
         private DataContext db = new DataContext();
 
         // GET: Employees
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page, string searchEmail, string searchName)
         {
-            return View(await db.Employees.ToListAsync());
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            ViewBag.searchEmail = String.IsNullOrEmpty(searchEmail) ? "" : searchEmail;
+            ViewBag.searchName = String.IsNullOrEmpty(searchName) ? "" : searchName;
+
+            
+
+            var employees = await db.Employees.ToListAsync();
+            var employee = from e in employees select e;
+
+            employee = db.Employees.OrderByDescending(e => e.RegisteredDate).ThenBy(e => e.LastName).ThenBy(e => e.FirstName);
+
+            if (!String.IsNullOrEmpty(searchEmail))
+            {
+                employee = employee.Where(e => e.Email.Contains(searchEmail));
+            }
+
+            if (!String.IsNullOrEmpty(searchName))
+            {
+                string[] renterNames;
+                renterNames = searchName.Split(' ');
+
+                if (renterNames.Count() == 1)
+                {
+                    employee = employee.Where(e => e.FirstName.Contains(searchName) || e.LastName.Contains(searchName));
+                }
+                else
+                {
+                    string r1 = renterNames[0];
+                    string r2 = renterNames[1];
+                    employee = employee.Where(e => e.FirstName.Contains(r1) && e.LastName.Contains(r2));
+                }
+            }
+
+            var employeesList = employee.ToPagedList(pageNumber, pageSize);
+
+            return View(employeesList);
         }
 
         // GET: Employees/Details/5
@@ -49,7 +87,7 @@ namespace mis4200team2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,FirstName,LastName,Email,RegisteredDate,HireDate,BusinessUnit,Title")] Employee employee)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Role,FirstName,LastName,Email,RegisteredDate,HireDate,BusinessUnit,Title")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +98,7 @@ namespace mis4200team2.Controllers
                 employee.Email = User.Identity.GetUserName();
 
                 employee.RegisteredDate = DateTime.Now;
-                employee.BusinessUnit = Employee.BusinessUnits.start;
+                employee.Role = Employee.Roles.user;
 
                 db.Employees.Add(employee);
 
@@ -99,8 +137,7 @@ namespace mis4200team2.Controllers
             Guid.TryParse(User.Identity.GetUserId(), out employeeID);
 
             Employee currentEmployee = await db.Employees.FindAsync(employeeID);
-            bool isAuthorized = currentEmployee.BusinessUnit == Employee.BusinessUnits.admin;
-            
+            bool isAuthorized = currentEmployee.Role == Employee.Roles.admin;            
             if(currentEmployee != null)
             {
                 if (employeeID == id || isAuthorized)
@@ -124,7 +161,7 @@ namespace mis4200team2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,FirstName,LastName,Email,RegisteredDate,HireDate,BusinessUnit,Title")] Employee employee)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,Role,FirstName,LastName,Email,RegisteredDate,HireDate,BusinessUnit,Title")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -160,7 +197,7 @@ namespace mis4200team2.Controllers
             Guid.TryParse(User.Identity.GetUserId(), out employeeID);
 
             Employee currentUser = await db.Employees.FindAsync(employeeID);
-            bool isAuthorized = currentUser.BusinessUnit == Employee.BusinessUnits.admin;
+            bool isAuthorized = currentUser.Role == Employee.Roles.admin;
 
             if (isAuthorized)
             {
