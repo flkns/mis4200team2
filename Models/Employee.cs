@@ -10,7 +10,7 @@ namespace mis4200team2.Models
 {
     public class Employee
     {
-        public int ID { get; set; }
+        public Guid ID { get; set; }
 
         [Required, Display(Name="First Name"), StringLength(50)]
         public string FirstName { get; set; }
@@ -18,6 +18,7 @@ namespace mis4200team2.Models
         [Required, Display(Name = "Last Name"), StringLength(50)]
         public string LastName { get; set; }
 
+        [Display(Name = "Full Name")]
         public string FullName
         {
             get
@@ -26,20 +27,37 @@ namespace mis4200team2.Models
             }
         }
 
-        [Required, Display(Name = "Email"), StringLength(50), DataType(DataType.EmailAddress)]
+        [
+            Display(Name = "Email"),
+            DataType(DataType.EmailAddress)
+        ]
         public string Email { get; set; }
 
-        [Required, DataType(DataType.Date), Display(Name = "Registered Date")]
+        [
+            Display(Name = "Phone #"),
+            DataType(DataType.PhoneNumber),
+            RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Please enter a valid phone number.")
+        ]
+        public string Phone { get; set; }
+
+        [DataType(DataType.Date), Display(Name = "Registered Date")]
         public DateTime RegisteredDate { get; set; }
 
-        [Required, DataType(DataType.Date), DisplayFormat(DataFormatString="{0:yyyy-MM-dd}", ApplyFormatInEditMode=true), Display(Name="Hire Date")]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString="{0:yyyy-MM-dd}", ApplyFormatInEditMode=true), Display(Name="Hire Date")]
         public DateTime HireDate { get; set; }
 
-        [Required, Display(Name ="Business Unit"), StringLength(50)]
-        public string BusinessUnit { get; set; }
-
-        [Required, Display(Name = "Title"), StringLength(50)]
+        [Display(Name = "Title"), StringLength(50)]
         public string Title { get; set; }
+
+        [Display(Name ="Business Unit")]
+        public BusinessUnits BusinessUnit { get; set; }
+
+        public enum BusinessUnits
+        {
+            start = 0,
+            admin = 1,
+
+        }
 
     }
 }

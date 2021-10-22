@@ -1,16 +1,19 @@
 ﻿@model mis4200team2.Models.Employee
 
+@using Microsoft.AspNet.Identity;
+@using mis4200team2.Models;
+@using mis4200team2.Data;
+
 @{
     ViewBag.Title = "Edit";
 }
 
 <h2>Edit</h2>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Employee</h4>
         <hr />
@@ -33,6 +36,25 @@
             </div>
         </div>
 
+        <!--
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RegisteredDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RegisteredDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RegisteredDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        -->
+
         <div class="form-group">
             @Html.LabelFor(model => model.HireDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -41,6 +63,7 @@
             </div>
         </div>
 
+        <!--
         <div class="form-group">
             @Html.LabelFor(model => model.BusinessUnit, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -48,6 +71,34 @@
                 @Html.ValidationMessageFor(model => model.BusinessUnit, "", new { @class = "text-danger" })
             </div>
         </div>
+         -->
+
+        @{
+            DataContext db = new DataContext();
+
+            Guid employeeID;
+            Guid.TryParse(User.Identity.GetUserId(), out employeeID);
+
+            Employee currentEmployee = db.Employees.Find(employeeID);
+
+            if (currentEmployee != null)
+            {
+                bool isAuthorized = currentEmployee.BusinessUnit == Employee.BusinessUnits.admin;
+
+                if (isAuthorized)
+                {
+                    <dib class="form-group">
+                        @Html.LabelFor(model => model.BusinessUnit, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EnumDropDownListFor(model => model.BusinessUnit, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.BusinessUnit, "", new { @class = "text-danger" })
+                        </div>
+                    </dib>
+                } else {
+                        @Html.HiddenFor(model => model.BusinessUnit, new { Value = @Model.BusinessUnit })
+                }
+            }
+        }
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -68,7 +119,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

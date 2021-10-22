@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<mis4200team2.Models.Employee>
 
+@using Microsoft.AspNet.Identity;
+@using mis4200team2.Models;
+@using mis4200team2.Data;
+
 @{
     ViewBag.Title = "Index";
 }
@@ -18,6 +22,15 @@
             @Html.DisplayNameFor(model => model.LastName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegisteredDate)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.HireDate)
         </th>
         <th>
@@ -30,28 +43,54 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HireDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BusinessUnit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Phone)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RegisteredDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.HireDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BusinessUnit)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+        @{
+            DataContext db = new DataContext();
+
+            Guid employeeID;
+            Guid.TryParse(User.Identity.GetUserId(), out employeeID);
+
+            Employee currentEmployee = db.Employees.Find(employeeID);
+
+            if (currentEmployee != null)
+            {
+                bool isAuthorized = currentEmployee.BusinessUnit == Employee.BusinessUnits.admin;
+
+                if (isAuthorized)
+                {
+                    <a href="/Employees/edit/@item.ID"> | Edit </a>
+                    <a href="/Employees/delete/@item.ID"> | Delete </a>
+                }
+            }
+        }
+    </td>
+</tr>
 }
 
 </table>
