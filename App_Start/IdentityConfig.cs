@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Configuration;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Net.Mime;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -21,70 +16,10 @@ namespace mis4200team2
 {
     public class EmailService : IIdentityMessageService
     {
-        public async Task SendAsync(IdentityMessage message)
+        public Task SendAsync(IdentityMessage message)
         {
-            await SendEmail(message);
-        }
-
-        private async Task SendEmail(IdentityMessage message) {
-            var mailError = "";
-
-            SmtpClient client = new SmtpClient();
-            client.Host = "host";
-            client.Port = 000;
-
-            MailAddress from = new MailAddress("test@mail.com", "eCentric Email Service", System.Text.Encoding.UTF8);
-            MailAddress to = new MailAddress(message.Destination);
-
-            MailMessage msg = new MailMessage(from, to);
-
-            msg.Subject = message.Subject;
-            msg.SubjectEncoding = System.Text.Encoding.UTF8;
-
-            msg.Body = message.Body;
-            msg.BodyEncoding = System.Text.Encoding.UTF8;
-
-            // client.SendCompleted += new SendCompletedEventHandler(SendCompletedEmailCallback);
-
-            string userState = "test message1";
-            // client.SendAsync(message, userState);
-            // Console.WriteLine("Sending message... press c to cancel mail. Press any other key to exit.");
-            // string answer = Console.ReadLine();
-            // If the user canceled the send, and mail hasn't been sent yet,
-            // then cancel the pending operation.
-            // if (answer.StartsWith("c") && mailSent == false)
-            // {
-            // client.SendAsyncCancel();
-            // }
-            // Clean up.
-            // message.Dispose();
-            // Console.WriteLine("Goodbye.");
-
-
-            var credentials = new System.Net.NetworkCredential(
-                ConfigurationManager.AppSettings["mailAccount"],
-                ConfigurationManager.AppSettings["mailPassword"]
-            );
-
-            Trace.WriteLine("Sending email...");
-
-            try
-            {
-                client.UseDefaultCredentials = true;
-                client.Credentials = credentials;
-                client.EnableSsl = true;
-
-                client.SendAsync(msg, userState);
-                
-                mailError = "";
-                Trace.WriteLine("Email sent!");
-            } catch (Exception ex)
-            {
-                mailError = ex.Message;
-                Trace.TraceError(mailError);
-
-                await Task.FromResult(0);
-            }
+            // Plug in your email service here to send an email.
+            return Task.FromResult(0);
         }
     }
 
