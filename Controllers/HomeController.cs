@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace mis4200team2.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()
