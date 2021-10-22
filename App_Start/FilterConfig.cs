@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace mis4200team2
 {
-    public class FilterConfig
+    public static class FilterConfig
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
