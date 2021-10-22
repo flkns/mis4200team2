@@ -26,6 +26,12 @@ namespace mis4200team2.Models
             }
         }
 
+        [Required, Display(Name = "Email"), StringLength(50), DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        [Required, DataType(DataType.Date), Display(Name = "Registered Date")]
+        public DateTime RegisteredDate { get; set; }
+
         [Required, DataType(DataType.Date), DisplayFormat(DataFormatString="{0:yyyy-MM-dd}", ApplyFormatInEditMode=true), Display(Name="Hire Date")]
         public DateTime HireDate { get; set; }
 

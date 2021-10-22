@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using mis4200team2.Data;
 using mis4200team2.Models;
 
 namespace mis4200team2.Controllers
@@ -79,6 +80,12 @@ namespace mis4200team2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    // DataContext db = new DataContext();
+                    // var user = db.Employees.Where(u => u.Email == model.Email).FirstOrDefault();
+                    // if(user is null)
+                    // {
+                    //     return View("FinishRegistration");
+                    // }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

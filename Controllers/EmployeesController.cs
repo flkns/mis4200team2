@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using mis4200team2.Data;
 using mis4200team2.Models;
 
 namespace mis4200team2.Controllers
 {
+    // [Authorize]
     public class EmployeesController : Controller
     {
         private DataContext db = new DataContext();
@@ -48,10 +50,15 @@ namespace mis4200team2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,FirstName,LastName,HireDate,BusinessUnit,Title")] Employee employee)
+        public async Task<ActionResult> Create([Bind(Include = "ID,FirstName,LastName,RegisteredDate,HireDate,BusinessUnit,Title")] Employee employee)
         {
             if (ModelState.IsValid)
             {
+                // Guid employeeID;
+                // Guid.TryParse(User.Identity.GetUserId(), out employeeID);
+                // employee.ID = employeeID;
+                // employee.Email = User.Identity.Name;
+                // employee.RegisteredDate = DateTime.Now;
                 db.Employees.Add(employee);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
