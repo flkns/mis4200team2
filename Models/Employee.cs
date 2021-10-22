@@ -12,7 +12,16 @@ namespace mis4200team2.Models
     {
         public Guid ID { get; set; }
 
-        [Required, Display(Name="First Name"), StringLength(50)]
+        [Display(Name = "User Role")]
+        public Roles Role { get; set; }
+
+        public enum Roles
+        {
+            admin = 0,
+            user = 1,
+        }
+
+        [Required, Display(Name = "First Name"), StringLength(50)]
         public string FirstName { get; set; }
 
         [Required, Display(Name = "Last Name"), StringLength(50)]
@@ -29,7 +38,8 @@ namespace mis4200team2.Models
 
         [
             Display(Name = "Email"),
-            DataType(DataType.EmailAddress)
+            DataType(DataType.EmailAddress),
+            RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", ErrorMessage = "Please enter a valid email address.")
         ]
         public string Email { get; set; }
 
@@ -49,15 +59,14 @@ namespace mis4200team2.Models
         [Display(Name = "Title"), StringLength(50)]
         public string Title { get; set; }
 
-        [Display(Name ="Business Unit")]
+        [Display(Name = "Business Unit")]
         public BusinessUnits BusinessUnit { get; set; }
-
         public enum BusinessUnits
         {
-            start = 0,
-            admin = 1,
+            test = 0,
+            HR = 1,
+            Accounting = 2,
 
         }
-
     }
 }
