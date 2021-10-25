@@ -205,6 +205,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Blank-Avatar.png" />
     <Content Include="Images\Centric.png" />
     <Content Include="Images\columbus-devstudio-deliver.jpg" />
     <Content Include="Scripts\bootstrap.js" />
