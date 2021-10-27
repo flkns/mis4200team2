@@ -37,7 +37,6 @@ namespace mis4200team2.Models
         }
 
         [
-            Required,
             Display(Name = "Email"),
             DataType(DataType.EmailAddress),
             RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", ErrorMessage = "Please enter a valid email address.")
@@ -57,7 +56,7 @@ namespace mis4200team2.Models
         [Required, DataType(DataType.Date), DisplayFormat(DataFormatString="{0:yyyy-MM-dd}", ApplyFormatInEditMode=true), Display(Name="Hire Date")]
         public DateTime HireDate { get; set; }
 
-        [Display(Name = "Title"), StringLength(50)]
+        [Required, Display(Name = "Title"), StringLength(50)]
         public string Title { get; set; }
 
         [Required, Display(Name = "Business Unit")]
