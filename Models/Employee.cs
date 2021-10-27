@@ -12,7 +12,7 @@ namespace mis4200team2.Models
     {
         public Guid ID { get; set; }
 
-        [Display(Name = "User Role")]
+        [Required, Display(Name = "User Role")]
         public Roles Role { get; set; }
 
         public enum Roles
@@ -37,6 +37,7 @@ namespace mis4200team2.Models
         }
 
         [
+            Required,
             Display(Name = "Email"),
             DataType(DataType.EmailAddress),
             RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", ErrorMessage = "Please enter a valid email address.")
@@ -50,16 +51,16 @@ namespace mis4200team2.Models
         ]
         public string Phone { get; set; }
 
-        [DataType(DataType.Date), Display(Name = "Registered Date")]
+        [Required, DataType(DataType.Date), Display(Name = "Registered Date")]
         public DateTime RegisteredDate { get; set; }
 
-        [DataType(DataType.Date), DisplayFormat(DataFormatString="{0:yyyy-MM-dd}", ApplyFormatInEditMode=true), Display(Name="Hire Date")]
+        [Required, DataType(DataType.Date), DisplayFormat(DataFormatString="{0:yyyy-MM-dd}", ApplyFormatInEditMode=true), Display(Name="Hire Date")]
         public DateTime HireDate { get; set; }
 
         [Display(Name = "Title"), StringLength(50)]
         public string Title { get; set; }
 
-        [Display(Name = "Business Unit")]
+        [Required, Display(Name = "Business Unit")]
         public BusinessUnits BusinessUnit { get; set; }
         public enum BusinessUnits
         {
