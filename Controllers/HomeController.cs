@@ -27,5 +27,12 @@ namespace mis4200team2.Controllers
 
             return View();
         }
+
+        public ActionResult CoreValues()
+        {
+            ViewBag.Message = "Your values page.";
+
+            return View();
+        }
     }
 }
