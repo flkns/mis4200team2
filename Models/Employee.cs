@@ -12,7 +12,7 @@ namespace mis4200team2.Models
     {
         public Guid ID { get; set; }
 
-        [Required, Display(Name = "User Role")]
+        [Display(Name = "User Role")]
         public Roles Role { get; set; }
 
         public enum Roles
@@ -51,7 +51,7 @@ namespace mis4200team2.Models
         ]
         public string Phone { get; set; }
 
-        [Required, DataType(DataType.Date), Display(Name = "Registered Date")]
+        [DataType(DataType.Date), Display(Name = "Registered Date")]
         public DateTime RegisteredDate { get; set; }
 
         [Required, DataType(DataType.Date), DisplayFormat(DataFormatString="{0:yyyy-MM-dd}", ApplyFormatInEditMode=true), Display(Name="Hire Date")]
