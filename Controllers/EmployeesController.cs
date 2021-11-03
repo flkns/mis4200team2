@@ -77,6 +77,7 @@ namespace mis4200team2.Controllers
         }
 
         // GET: Employees/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
