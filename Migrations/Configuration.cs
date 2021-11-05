@@ -17,8 +17,8 @@ namespace mis4200team2.Migrations
         {
             // TO MAKE YOURSELF AN ADMIN, CHANGE BELOW:
 
-            // Guid adminID = context.Employees.Where(e => e.Email == "adminemail@test.com").FirstOrDefault().ID;
-            // context.Employees.Find(adminID).BusinessUnit = Employee.BusinessUnits.admin;
+            //Guid adminID = context.Employees.Where(e => e.Email == "bf853817@ohio.edu").FirstOrDefault().ID;
+            //context.Employees.Find(adminID).Role = Employee.Roles.admin;
         }
     }
 }

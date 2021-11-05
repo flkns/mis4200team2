@@ -68,5 +68,8 @@ namespace mis4200team2.Models
             Accounting = 2,
 
         }
+
+        [Timestamp]
+        public byte[] Version { get; set; }
     }
 }

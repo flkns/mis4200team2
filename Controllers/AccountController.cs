@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -19,15 +23,17 @@ namespace mis4200team2.Controllers
   {
     private ApplicationSignInManager _signInManager;
     private ApplicationUserManager _userManager;
+    private ApplicationRoleManager _roleManager;
 
     public AccountController()
     {
     }
 
-    public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+    public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager)
     {
       UserManager = userManager;
       SignInManager = signInManager;
+      RoleManager = roleManager;
     }
 
     public ApplicationSignInManager SignInManager
@@ -51,6 +57,18 @@ namespace mis4200team2.Controllers
       private set
       {
         _userManager = value;
+      }
+    }
+
+    public ApplicationRoleManager RoleManager
+    {
+      get
+      {
+        return _roleManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+      }
+      private set
+      {
+        _roleManager = value;
       }
     }
 
@@ -186,9 +204,12 @@ namespace mis4200team2.Controllers
       if (ModelState.IsValid)
       {
         var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
         var result = await UserManager.CreateAsync(user, model.Password);
         if (result.Succeeded)
         {
+          
+          //await UserManager.AddToRoleAsync(user.Id, "user");
           await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
 
           ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
@@ -432,6 +453,84 @@ namespace mis4200team2.Controllers
     [AllowAnonymous]
     public ActionResult ExternalLoginFailure()
     {
+      return View();
+    }
+
+    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
+    [HttpPut]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> AssignRolesToUser(string userId, string[] roles)
+    {
+      if(roles == null)
+      {
+        ViewBag.ErrorMessage = "No roles specified.";
+        return View("Error");
+      }
+      
+      var user = await UserManager.FindByIdAsync(userId);
+      if(user == null)
+      {
+        ViewBag.ErrorMessage = "User not found.";
+        return View("Error");
+      }
+
+      var currentRoles = await UserManager.GetRolesAsync(user.Id);
+
+      var rolesNotExist = roles.Except(RoleManager.Roles.Select(x => x.Name)).ToArray();
+      if(rolesNotExist.Count() > 0)
+      {
+        ModelState.AddModelError("", string.Format("Roles '{0}' does not exist in the system", string.Join(",", rolesNotExist)));
+        ViewBag.ErrorMessage = "Role does not exist.";
+        return View("Error");
+      }
+
+      IdentityResult removeResult = await UserManager.RemoveFromRolesAsync(user.Id, currentRoles.ToArray());
+
+      if (!removeResult.Succeeded)
+      {
+        ModelState.AddModelError("", "Failed to remove user roles.");
+        ViewBag.ErrorMessage = "Failed to remove user roles.";
+        return View("Error");
+      }
+
+      IdentityResult addResult = await UserManager.AddToRolesAsync(user.Id, roles);
+
+      if (!addResult.Succeeded)
+      {
+        ModelState.AddModelError("", "Failed to add user roles.");
+        ViewBag.ErrorMessage = "Failed to add user roles.";
+        return View("Error");
+      }
+
+      return View(new { userId, rolesAssigned = roles });
+    }
+
+    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
+    [HttpDelete]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> DeleteUser(string userId)
+    {
+      var userToDelete = await UserManager.FindByIdAsync(userId);
+      if (userToDelete == null)
+      {
+        ViewBag.ErrorMessage = "User not found.";
+        return View("Error");
+      } else
+      {
+        var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        using(SqlConnection connection = new SqlConnection(con))
+        {
+          using (SqlCommand command = new SqlCommand("dbo.DeleteUser", connection)) {
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.Add("@UserId", SqlDbType.NVarChar).Value = userId;
+            connection.Open();
+            await command.ExecuteNonQueryAsync();
+            connection.Close();
+          }
+        }
+      }
       return View();
     }
 

@@ -72,19 +72,19 @@
         </div>
 
         @{
-            DataContext db = new DataContext();
+          DataContext db = new DataContext();
 
-            Guid employeeID;
-            Guid.TryParse(User.Identity.GetUserId(), out employeeID);
+          Guid employeeID;
+          Guid.TryParse(User.Identity.GetUserId(), out employeeID);
 
-            Employee currentEmployee = db.Employees.Find(employeeID);
+          Employee currentEmployee = db.Employees.Find(employeeID);
 
-            if (currentEmployee != null)
+          if (currentEmployee != null)
+          {
+            bool isAuthorized = currentEmployee.Role == Employee.Roles.admin;
+
+            if (isAuthorized)
             {
-                bool isAuthorized = currentEmployee.Role == Employee.Roles.admin;
-
-                if (isAuthorized)
-                {
                     <dib class="form-group">
                         @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">

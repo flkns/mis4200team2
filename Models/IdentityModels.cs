@@ -23,6 +23,7 @@ namespace mis4200team2.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Configuration.LazyLoadingEnabled = true;
         }
 
         public static ApplicationDbContext Create()
