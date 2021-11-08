@@ -94,15 +94,16 @@ namespace mis4200team2.Controllers
       }
 
       var user = await UserManager.FindByEmailAsync(model.Email);
-      if(user != null)
-      {
-        if(!await UserManager.IsEmailConfirmedAsync(user.Id))
-        {
-          await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
-          ViewBag.ErrorMessage = "You must have a confirmed email to login!";
-          return View("Error");
-        }
-      }
+//deactivated by Luce
+      //if(user != null)
+      //{
+      //  if(!await UserManager.IsEmailConfirmedAsync(user.Id))
+      //  {
+      //    await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
+      //    ViewBag.ErrorMessage = "You must have a confirmed email to login!";
+      //    return View("Error");
+      //  }
+      //}
 
       // This doesn't count login failures towards account lockout
       // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -134,14 +135,14 @@ namespace mis4200team2.Controllers
 
     private async Task<string> SendEmailConfirmationTokenAsync(string userId, string subject)
     {
-      string code = await UserManager.GenerateEmailConfirmationTokenAsync(userId);
-      var callbackUrl = Url.Action("ConfirmEmail", "Account",
-      new { userId, code }, protocol: Request.Url.Scheme);
-      await UserManager.SendEmailAsync(userId, subject,
-         "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userId);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account",
+            new { userId, code }, protocol: Request.Url.Scheme);
+            await UserManager.SendEmailAsync(userId, subject,
+               "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-      return callbackUrl;
-    }
+            return callbackUrl;
+        }
 
     //
     // GET: /Account/VerifyCode
@@ -208,17 +209,17 @@ namespace mis4200team2.Controllers
         var result = await UserManager.CreateAsync(user, model.Password);
         if (result.Succeeded)
         {
-          
-          //await UserManager.AddToRoleAsync(user.Id, "user");
-          await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
 
-          ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
-                         + "before you can log in.";
+                    //await UserManager.AddToRoleAsync(user.Id, "user");
+                    //await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
 
-          return View("Info");
+                    //ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                    //               + "before you can log in.";
 
-          //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-          //return RedirectToAction("Create", "Employees
+                    //return View("Info");
+
+                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    return RedirectToAction("Create", "Employees");
         }
         AddErrors(result);
       }
