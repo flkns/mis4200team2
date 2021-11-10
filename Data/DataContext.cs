@@ -26,11 +26,13 @@ namespace mis4200team2.Data
     public DataContext() : base("name=DefaultConnection") {  }
 
     public DbSet<Employee> Employees { get; set; }
+    public DbSet<Kudos> Kudos { get; set; }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
       modelBuilder.Entity<Employee>().Property(p => p.Version).IsConcurrencyToken();
       modelBuilder.Entity<Employee>().ToTable(nameof(Employee));
+      modelBuilder.Entity<Kudos>().ToTable(nameof(Kudos));
     }
   }
 
