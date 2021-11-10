@@ -20,7 +20,6 @@ namespace mis4200team2.Controllers
 
             return View();
         }
-    [Authorize(Roles = "Admin")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Centric's Contact Page";
