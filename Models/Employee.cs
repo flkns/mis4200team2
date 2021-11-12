@@ -66,8 +66,10 @@ namespace mis4200team2.Models
             test = 0,
             HR = 1,
             Accounting = 2,
-
         }
+        
+        [Display(Name = "Kudos")]
+        public ICollection<Kudos> EmployeeKudos { get; set; }
 
         [Timestamp]
         public byte[] Version { get; set; }
