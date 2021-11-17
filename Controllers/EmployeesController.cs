@@ -11,6 +11,7 @@ using mis4200team2.Models;
 
 namespace mis4200team2.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private DataContext db = new DataContext();
