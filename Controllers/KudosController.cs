@@ -41,8 +41,8 @@ namespace mis4200team2.Controllers
         // GET: Kudos/Create
         public ActionResult Create()
         {
-            ViewBag.SenderID = new SelectList(db.Employees, "ID", "FirstName");
-            ViewBag.ReceiverID = new SelectList(db.Employees, "ID", "FirstName");
+            ViewBag.SenderID = new SelectList(db.Employees, "ID", "FullName");
+            ViewBag.ReceiverID = new SelectList(db.Employees, "ID", "FullName");
             return View();
         }
 
@@ -61,8 +61,8 @@ namespace mis4200team2.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.SenderID = new SelectList(db.Employees, "ID", "FirstName", kudos.SenderID);
-            ViewBag.ReceiverID = new SelectList(db.Employees, "ID", "FirstName", kudos.ReceiverID);
+            ViewBag.SenderID = new SelectList(db.Employees, "ID", "FullName", kudos.SenderID);
+            ViewBag.ReceiverID = new SelectList(db.Employees, "ID", "FullName", kudos.ReceiverID);
             return View(kudos);
         }
 
