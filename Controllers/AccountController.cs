@@ -117,7 +117,8 @@ namespace mis4200team2.Controllers
 
           if (dbUser is null)
           {
-            return View("Create");
+                  //return View("Create");
+                  return RedirectToAction("Create", "Employees");
           }
 
           return RedirectToLocal(returnUrl);
