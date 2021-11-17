@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mis4200team2.Models
 {
@@ -7,9 +8,15 @@ namespace mis4200team2.Models
   {
     public Guid ID { get; set; }
 
+    
     public Guid SenderID { get; set; }
+    [ForeignKey("SenderID")] 
+    public virtual Employee Employee { get; set; }
 
+ 
     public Guid ReceiverID { get; set; }
+    [ForeignKey("ReceiverID")]
+    public virtual Employee Employees { get; set; }
 
     public DateTime SendTime { get; set; }
 

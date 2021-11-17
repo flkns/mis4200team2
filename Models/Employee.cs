@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mis4200team2.Models
 {
@@ -69,7 +70,11 @@ namespace mis4200team2.Models
         }
         
         [Display(Name = "Kudos")]
-        public ICollection<Kudos> EmployeeKudos { get; set; }
+        [ForeignKey("SenderID")]
+        public ICollection<Kudos> SenderKudos { get; set; }
+        
+        [ForeignKey("ReceiverID")]
+        public ICollection<Kudos> ReceiverKudos { get; set; }
 
         [Timestamp]
         public byte[] Version { get; set; }

@@ -307,14 +307,12 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\CoreValues.cshtml" />
     <Content Include="Views\Account\FinishRegistration.cshtml" />
+    <Content Include="Views\Shared\Info.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
     <Content Include="Views\Employees\Delete.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
-    <Content Include="Views\Employees\Error.cshtml" />
-    <Content Include="Views\Employees\all.cshtml" />
-    <Content Include="Views\Shared\Info.cshtml" />
     <Content Include="Views\Kudos\Create.cshtml" />
     <Content Include="Views\Kudos\Delete.cshtml" />
     <Content Include="Views\Kudos\Details.cshtml" />

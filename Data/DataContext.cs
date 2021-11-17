@@ -9,6 +9,7 @@ using System.Linq;
 //using mis4200team2.Logging;
 using System.Data.SqlClient;
 using System.Reflection;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace mis4200team2.Data
 {
@@ -21,20 +22,25 @@ namespace mis4200team2.Data
     //  DbInterception.Add(new DataInterceptorLogging());
     //}
   }
-  public class DataContext : DbContext
-  {
-    public DataContext() : base("name=DefaultConnection") {  }
-
-    public DbSet<Employee> Employees { get; set; }
-    public DbSet<Kudos> Kudos { get; set; }
-
-    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    public class DataContext : DbContext
     {
-      modelBuilder.Entity<Employee>().Property(p => p.Version).IsConcurrencyToken();
-      modelBuilder.Entity<Employee>().ToTable(nameof(Employee));
-      modelBuilder.Entity<Kudos>().ToTable(nameof(Kudos));
+        public DataContext() : base("name=DefaultConnection") { }
+
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Kudos> Kudos { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Employee>().Property(p => p.Version).IsConcurrencyToken();
+            modelBuilder.Entity<Employee>().ToTable(nameof(Employee));
+            modelBuilder.Entity<Kudos>().ToTable(nameof(Kudos));
+        
+
+
+        modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();  // note: this is all one line!
+      }
     }
-  }
+
 
   //public class DataInterceptorLogging : DbCommandInterceptor
   //{

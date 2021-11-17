@@ -18,7 +18,8 @@ namespace mis4200team2.Controllers
         // GET: Kudos
         public ActionResult Index()
         {
-            return View(db.Kudos.ToList());
+            var kudos = db.Kudos.Include(k => k.Employee).Include(k => k.Employees);
+            return View(kudos.ToList());
         }
 
         // GET: Kudos/Details/5
@@ -39,6 +40,8 @@ namespace mis4200team2.Controllers
         // GET: Kudos/Create
         public ActionResult Create()
         {
+            ViewBag.SenderID = new SelectList(db.Employees, "ID", "FirstName");
+            ViewBag.ReceiverID = new SelectList(db.Employees, "ID", "FirstName");
             return View();
         }
 
@@ -57,6 +60,8 @@ namespace mis4200team2.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.SenderID = new SelectList(db.Employees, "ID", "FirstName", kudos.SenderID);
+            ViewBag.ReceiverID = new SelectList(db.Employees, "ID", "FirstName", kudos.ReceiverID);
             return View(kudos);
         }
 
@@ -72,6 +77,8 @@ namespace mis4200team2.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.SenderID = new SelectList(db.Employees, "ID", "FirstName", kudos.SenderID);
+            ViewBag.ReceiverID = new SelectList(db.Employees, "ID", "FirstName", kudos.ReceiverID);
             return View(kudos);
         }
 
@@ -88,6 +95,8 @@ namespace mis4200team2.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.SenderID = new SelectList(db.Employees, "ID", "FirstName", kudos.SenderID);
+            ViewBag.ReceiverID = new SelectList(db.Employees, "ID", "FirstName", kudos.ReceiverID);
             return View(kudos);
         }
 
