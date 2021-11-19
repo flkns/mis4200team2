@@ -31,11 +31,8 @@ namespace mis4200team2.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Employee>().Property(p => p.Version).IsConcurrencyToken();
             modelBuilder.Entity<Employee>().ToTable(nameof(Employee));
             modelBuilder.Entity<Kudos>().ToTable(nameof(Kudos));
-        
-
 
         modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();  // note: this is all one line!
       }

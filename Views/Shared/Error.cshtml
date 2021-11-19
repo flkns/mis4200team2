@@ -6,12 +6,7 @@
 
 <h1 class="text-danger">Error.</h1>
 @{
-  if (String.IsNullOrEmpty(ViewBag.ErrorMessage))
-  {
+
     <h2 class="text-danger">An error occurred while processing your request.</h2>
-  }
-  else
-  {
-    <h2 class="text-danger">@ViewBag.ErrorMessage</h2>
-  }
+    <h2 class="text-danger">@ViewBag.Error</h2>
 }
