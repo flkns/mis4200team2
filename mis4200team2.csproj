@@ -318,6 +318,7 @@
     <Content Include="Views\Kudos\Details.cshtml" />
     <Content Include="Views\Kudos\Edit.cshtml" />
     <Content Include="Views\Kudos\Index.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Email\" />

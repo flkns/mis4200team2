@@ -11,16 +11,11 @@ namespace mis4200team2.Models
 {
   public class Employee
   {
+    [Key]
     public Guid ID { get; set; }
 
     [Display(Name = "User Role")]
-    public Roles Role { get; set; }
-
-    public enum Roles
-    {
-      admin = 0,
-      user = 1,
-    }
+    public string Role { get; set; }
 
     [Required, Display(Name = "First Name"), StringLength(50)]
     public string FirstName { get; set; }
@@ -75,5 +70,8 @@ namespace mis4200team2.Models
 
     [ForeignKey("ReceiverID")]
     public ICollection<Kudos> ReceiverKudos { get; set; }
+
+    [DataType(DataType.Date), Display(Name = "Last Update DateTime")]
+    public DateTime LastUpdateDateTime { get; set; }
   }
 }

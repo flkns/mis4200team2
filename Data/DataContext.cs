@@ -10,18 +10,10 @@ using System.Linq;
 using System.Data.SqlClient;
 using System.Reflection;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Configuration;
 
 namespace mis4200team2.Data
 {
-  public class DataConfiguration : DbConfiguration
-  {
-    //public DataConfiguration()
-    //{
-    //  SetExecutionStrategy("System.Data.SqlClient", () => new SqlAzureExecutionStrategy());
-    //  DbInterception.Add(new DataInterceptorTransientErrors());
-    //  DbInterception.Add(new DataInterceptorLogging());
-    //}
-  }
     public class DataContext : DbContext
     {
         public DataContext() : base("name=DefaultConnection") { }

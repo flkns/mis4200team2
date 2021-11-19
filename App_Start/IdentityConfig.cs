@@ -83,9 +83,15 @@ namespace mis4200team2
       // Configure validation logic for usernames
       manager.UserValidator = new UserValidator<ApplicationUser>(manager)
       {
-        AllowOnlyAlphanumericUserNames = false,
+        AllowOnlyAlphanumericUserNames = true,
         RequireUniqueEmail = true
       };
+
+      var ben = manager.FindByEmail("bf853817@ohio.edu");
+      if (ben.Roles.Count() == 0)
+      {
+        manager.AddToRoles(ben.Id, new string[] { "Admin" });
+      }
 
       // Configure validation logic for passwords
       manager.PasswordValidator = new PasswordValidator
@@ -113,28 +119,21 @@ namespace mis4200team2
         Subject = "Security Code",
         BodyFormat = "Your security code is {0}"
       });
+
       manager.EmailService = new EmailService();
       manager.SmsService = new SmsService();
+
       var dataProtectionProvider = options.DataProtectionProvider;
       if (dataProtectionProvider != null)
       {
         manager.UserTokenProvider =
             new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
       }
+
       return manager;
     }
   }
 
-  public class ApplicationRoleManager : RoleManager<IdentityRole>
-  {
-    public ApplicationRoleManager(IRoleStore<IdentityRole, string> roleStore) : base(roleStore) { }
-
-    public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
-    {
-      var appRoleManager = new ApplicationRoleManager(new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
-      return appRoleManager;
-    }
-  }
 
   // Configure the application sign-in manager which is used in this application.
   public class ApplicationSignInManager : SignInManager<ApplicationUser, string>

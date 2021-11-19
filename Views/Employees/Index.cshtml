@@ -6,6 +6,11 @@
 
 <h2>Index</h2>
 
+@if (User.IsInRole("Admin"))
+{
+  <h1>Admin!!!</h1>
+}
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>

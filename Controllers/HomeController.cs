@@ -13,20 +13,20 @@ namespace mis4200team2.Controllers
         {
             return View();
         }
-
+        
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Centric's Contact Page";
 
+    public ActionResult Contact()
+        {
+        ViewBag.Message = "Centric's Contact Page";
+            
             return View();
         }
-
         public ActionResult CoreValues()
         {
             ViewBag.Message = "Your values page.";
