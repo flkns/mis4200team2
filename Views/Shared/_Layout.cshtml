@@ -29,6 +29,17 @@
                     <li>@Html.ActionLink("Core Values", "CoreValues", "Home")</li>
                     <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
                     <li>@Html.ActionLink("Kudos", "Index", "Kudos")</li>
+                    <span class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                            More
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
+                            <li>@Html.ActionLink("Kudos", "Index", "Kudos")</li>
+                            <li>@Html.ActionLink("Leaderboard", "Index", "Leaderboard")</li>
+                        </ul>
+                    </span>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
