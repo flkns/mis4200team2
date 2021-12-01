@@ -23,6 +23,12 @@ namespace mis4200team2.Controllers
             return View(kudos.ToList());
         }
 
+        public ActionResult Leaderboard()
+        {
+            var kudos = db.Kudos.Include(k => k.Employee).Include(k => k.Employees);
+            return View(kudos.ToList());
+        }
+
         // GET: Kudos/Details/5
         public ActionResult Details(Guid? id)
         {
