@@ -16,13 +16,10 @@
             @Html.DisplayNameFor(model => model.Employee)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Employees.Role)
+            @Html.DisplayNameFor(model => model.Employees.BusinessUnit)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SendTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
+            Kudos Recieved
         </th>
         <th></th>
     </tr>
@@ -30,16 +27,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Employee.Role)
+            @Html.DisplayFor(modelItem => item.Employee.FullName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Employees.Role)
+            @Html.DisplayFor(modelItem => item.Employees.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SendTime)
+            
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Type)
+            
         </td>
         <td>
 
