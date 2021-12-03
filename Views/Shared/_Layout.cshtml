@@ -27,18 +27,16 @@
                     @*<li>@Html.ActionLink("About Me", "About", "Home")</li>*@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Core Values", "CoreValues", "Home")</li>
-
-                    <span class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                            More
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
-                            <li>@Html.ActionLink("Kudos", "Index", "Kudos")</li>
-                            <li>@Html.ActionLink("Leaderboard", "Index", "Leaderboard")</li>
-                        </ul>
-                    </span>
+                    <li class="dropdown">s
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Dropdown <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
+                        <li>@Html.ActionLink("Kudos", "Index", "Kudos")</li>
+                        <li>@Html.ActionLink("Leaderboard", "Index", "Leaderboard")</li>
+                      </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
