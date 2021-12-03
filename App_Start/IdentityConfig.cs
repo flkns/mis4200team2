@@ -87,11 +87,11 @@ namespace mis4200team2
         RequireUniqueEmail = true
       };
 
-      var ben = manager.FindByEmail("bf853817@ohio.edu");
-      if (ben.Roles.Count() == 0)
-      {
-        manager.AddToRoles(ben.Id, new string[] { "Admin" });
-      }
+      //var ben = manager.FindByEmail("bf853817@ohio.edu");
+      //if (ben.Roles.Count() == 0)
+      //{
+      //  manager.AddToRoles(ben.Id, new string[] { "Admin" });
+      //}
 
       // Configure validation logic for passwords
       manager.PasswordValidator = new PasswordValidator
