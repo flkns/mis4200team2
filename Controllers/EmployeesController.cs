@@ -50,24 +50,21 @@ namespace mis4200team2.Controllers
     // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Create([Bind(Include = "ID,Role,FirstName,LastName,Email,Phone,RegisteredDate,HireDate,Title,BusinessUnit")] Employee employee)
+    public ActionResult Create([Bind(Include = "EmployeeID,Role,FirstName,LastName,Email,Phone,RegisteredDate,HireDate,Title,BusinessUnit")] Employee employee)
     {
       if (ModelState.IsValid)
       {
         Guid employeeID;
         Guid.TryParse(User.Identity.GetUserId(), out employeeID);
 
-        employee.ID = employeeID;
+        employee.EmployeeID = employeeID;
         employee.Email = User.Identity.GetUserName();
         employee.RegisteredDate = DateTime.Now;
         employee.LastUpdateDateTime = DateTime.Now;
-        employee.Role = "User";
-        
-
-        db.Employees.Add(employee);
 
         try
         {
+          db.Employees.Add(employee);
           db.SaveChanges();
         }
         catch (Exception ex)
@@ -83,7 +80,7 @@ namespace mis4200team2.Controllers
       return View(employee);
     }
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     // GET: Employees/Edit/5
     public ActionResult Edit(Guid? id)
     {
@@ -105,7 +102,7 @@ namespace mis4200team2.Controllers
     // POST: Employees/Edit/5
     // To protect from overposting attacks, enable the specific properties you want to bind to, for 
     // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     [HttpPost, ActionName("Edit")]
     [ValidateAntiForgeryToken]
     public ActionResult EditConfirmed(Guid? id)
@@ -117,18 +114,10 @@ namespace mis4200team2.Controllers
 
       var employeeToUpdate = db.Employees.Find(id);
 
-      /*var currentEmployeeEmail = User.Identity.GetUserName().ToString();
-      var currentEmployee = db.Employees.Where(e => e.Email.ToString().Equals(currentEmployeeEmail)).First();
+      Guid currentEmployeeID;
+      Guid.TryParse(User.Identity.GetUserId(), out currentEmployeeID);
 
-      if(currentEmployee == null)
-      {
-        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-      }
-
-      bool IsAdmin = User.IsInRole("Admin");
-      */
-
-      if ((id.ToString() == User.Identity.GetUserId().ToString()) || User.IsInRole("Admin"))
+      if ((id == currentEmployeeID) || User.IsInRole("admin"))
       {
         if (TryUpdateModel(employeeToUpdate, "", new string[] { "Role", "FirstName", "LastName", "Email", "Phone", "HireDate", "Title", "BusinessUnit", "LastUpdateDateTime" }))
         {
@@ -156,7 +145,7 @@ namespace mis4200team2.Controllers
     }
 
     // GET: Employees/Delete/5
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     public ActionResult Delete(Guid? id, bool? saveChangesError = false)
     {
       if (id == null)
@@ -181,7 +170,7 @@ namespace mis4200team2.Controllers
     }
 
     // POST: Employees/Delete/5
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public ActionResult DeleteConfirmed(Guid id)
@@ -201,13 +190,13 @@ namespace mis4200team2.Controllers
         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
       }
 
-      bool IsAdmin = User.IsInRole("Admin");
+      bool IsAdmin = User.IsInRole("admin");
 
       if (IsAdmin)
       {
         try
         {
-          var employeeToDelete = new Employee() { ID = id };
+          var employeeToDelete = new Employee() { EmployeeID = id };
           db.Entry(employeeToDelete).State = EntityState.Deleted;
 
           db.Employees.Remove(employeeToDelete);
@@ -215,7 +204,7 @@ namespace mis4200team2.Controllers
         }
         catch (DataException /* dex */)
         {
-          return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+          return RedirectToAction("Delete", new { EmployeeID = id, saveChangesError = true });
         }
 
         return RedirectToAction("Index");

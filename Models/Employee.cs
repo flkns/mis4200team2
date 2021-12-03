@@ -11,11 +11,7 @@ namespace mis4200team2.Models
 {
   public class Employee
   {
-    [Key]
-    public Guid ID { get; set; }
-
-    [Display(Name = "User Role")]
-    public string Role { get; set; }
+    public Guid EmployeeID { get; set; }
 
     [Required, Display(Name = "First Name"), StringLength(50)]
     public string FirstName { get; set; }
@@ -64,12 +60,12 @@ namespace mis4200team2.Models
       Accounting = 2,
     }
 
-    [Display(Name = "Kudos")]
-    [ForeignKey("SenderID")]
-    public ICollection<Kudos> SenderKudos { get; set; }
+    //[Display(Name = "Kudos")]
+    //[ForeignKey("SenderID")]
+    public ICollection<Kudos> SentKudos { get; set; }
 
-    [ForeignKey("ReceiverID")]
-    public ICollection<Kudos> ReceiverKudos { get; set; }
+    //[ForeignKey("ReceiverID")]
+    public ICollection<Kudos> ReceivedKudos { get; set; }
 
     [DataType(DataType.Date), Display(Name = "Last Update DateTime")]
     public DateTime LastUpdateDateTime { get; set; }

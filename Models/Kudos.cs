@@ -6,22 +6,20 @@ namespace mis4200team2.Models
 {
   public class Kudos
   {
-    public Guid ID { get; set; }
+    public Guid KudosID { get; set; }
 
-    
     public Guid SenderID { get; set; }
-    [ForeignKey("SenderID")] 
-    public virtual Employee Employee { get; set; }
+    public virtual Employee SenderEmployee { get; set; }
 
- 
     public Guid ReceiverID { get; set; }
-    [ForeignKey("ReceiverID")]
-    public virtual Employee Employees { get; set; }
+    public virtual Employee ReceiverEmployee { get; set; }
 
+    [DataType(DataType.Date), Display(Name = "Send Time")]
     public DateTime SendTime { get; set; }
 
+    [Display(Name = "Kudos Type")]
     public KudosTypes Type { get; set; }
-
+    
     public enum KudosTypes
     {
       Excellence = 0,

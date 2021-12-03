@@ -10,20 +10,20 @@
     <h4>Kudos</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Employee.FirstName)
-        </dt>
+      <dt>
+        Sender Employee Name
+      </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Employee.FirstName)
+            @Html.DisplayFor(model => model.SenderEmployee.FullName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Employees.FirstName)
+            Receiver Employee Name
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Employees.FirstName)
+            @Html.DisplayFor(model => model.ReceiverEmployee.FullName)
         </dd>
 
         <dt>
@@ -45,6 +45,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.KudosID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

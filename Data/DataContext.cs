@@ -19,14 +19,15 @@ namespace mis4200team2.Data
         public DataContext() : base("name=DefaultConnection") { }
 
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<Kudos> Kudos { get; set; }
+        public DbSet<Kudos> KudosDB { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Employee>().ToTable(nameof(Employee));
-            modelBuilder.Entity<Kudos>().ToTable(nameof(Kudos));
+      base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<Employee>().ToTable(nameof(Employee));
+            //modelBuilder.Entity<Kudos>().ToTable(nameof(Kudos));
 
-        modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();  // note: this is all one line!
+        //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();  // note: this is all one line!
       }
     }
 
