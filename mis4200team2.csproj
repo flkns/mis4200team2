@@ -348,6 +348,7 @@
     <Content Include="Views\Kudos\Edit.cshtml" />
     <Content Include="Views\Kudos\Index.cshtml" />
     <Content Include="Views\Kudos\Leaderboard.cshtml" />
+    <Content Include="Views\Shared\_Navigation.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,0 +1,32 @@
+﻿<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Navigation">
+  <div class="container-fluid">
+    @Html.ActionLink("eCentric", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+        </li>
+        <li class="nav-item">
+          @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+        </li>
+        <li class="nav-item">
+          @Html.ActionLink("Core Values", "CoreValues", "Home", new { area = "" }, new { @class = "nav-link" })
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown">
+            <li>@Html.ActionLink("Employees", "Index", "Employees", new { area = "" }, new { @class = "dropdown-item" })</li>
+            <li>@Html.ActionLink("Kudos", "Index", "Kudos", new { area = "" }, new { @class = "dropdown-item" })</li>
+            <li>@Html.ActionLink("Leaderboard", "Leaderboard", "Kudos", new { area = "" }, new { @class = "dropdown-item" })</li>
+          </ul>
+        </li>
+      </ul>
+      @Html.Partial("_LoginPartial")
+    </div>
+  </div>
+</nav>
