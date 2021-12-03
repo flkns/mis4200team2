@@ -105,6 +105,12 @@ namespace mis4200team2.Controllers
         kudos.SenderID = currentEmployeeID;
         kudos.SendTime = DateTime.Now;
 
+        if((kudos.ReceiverEmployee.GetType() == null) || (kudos.ReceiverEmployee == null))
+        {
+            ViewBag.Error = "You cannot send kudos to no one!";
+            return View("Error");
+        }
+
         if ((kudos.SenderID == kudos.ReceiverID) || (kudos.SenderEmployee == kudos.ReceiverEmployee))
         {
           ViewBag.Error = "You cannot send kudos to yourself!";
