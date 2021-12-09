@@ -5,10 +5,10 @@
   {
     @Html.AntiForgeryToken()
 
-    <div class="me-2">
-      @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+    <div class="text-end">
+      @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "px-2 text-primary text-decoration-none" })
+      <button class="btn btn-outline-danger" type="button" onclick="javascript:document.getElementById('logoutForm').submit()">Log Out</button>
     </div>
-    <button class="btn btn-outline-danger" type="button" onclick="javascript:document.getElementById('logoutForm').submit()">Log Out</button>
   }
 }
 else

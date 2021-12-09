@@ -12,11 +12,11 @@
   @using (Html.BeginForm("Leaderboard", "Kudos", null, FormMethod.Post, new { @class = "form-horizontal" }))
   {
     <div class="form-group">
-      <label class="sr-only" for="search">Search by name</label>
+      <label class="sr-only" for="search">Search by name:</label>
       <div class="input-group">
         <input class="form-control" id="search" placeholder="Search for..." type="text" name="Search" value="@ViewData["CurrentFilter"]">
         <span class="input-group-btn">
-          <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+          <button class="btn btn-outline-primary" type="submit"><span class="glyphicon glyphicon-search"></span>Search</button>
         </span>
       </div>
     </div>
