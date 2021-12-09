@@ -8,13 +8,13 @@
     <div class="me-2">
       @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
     </div>
-    <button class="btn btn-outline-danger" type="button" onclick="javascript:document.getElementById('logoutForm').submit()"></button>
+    <button class="btn btn-outline-danger" type="button" onclick="javascript:document.getElementById('logoutForm').submit()">Log Out</button>
   }
 }
 else
 {
-  <div class="text-end">
-    <button type="button" class="btn btn-outline-light me-2">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</button>
-    <button type="button" class="btn btn-warning">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</button>
-  </div>
+<div class="text-end">
+    <button type="button" class="btn btn-outline-light me-2" id="loginLink" onclick="location.href='@Url.Action("Login", "Account", routeValues: null)'">Log In</button>
+    <button type="button" class="btn btn-warning" id="registerLink" onclick="location.href='@Url.Action("Register", "Account", routeValues: null)'">Sign Up</button>
+</div>
 }

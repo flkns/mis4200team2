@@ -4,25 +4,82 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title | eCentric</title>
-  <meta name="description" content="Centric Consulting Employee Application">
+    <meta name="description" content="Centric Consulting Employee Application">
     <!-- Add to HTML Head -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="bg-light">
-  @Html.Partial("_Navigation")
+    <header>
+        <div class="p-2 bg-dark text-white fixed-top">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="@Url.Action("Index", "Home", new { area = "" })" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <span class="fs-4 bi me-4">eCentric</span>
+                    </a>
 
-  <main class="container">
-    @RenderBody()
-    <hr />
-    <footer>
-      <p>&copy; @DateTime.Now.Year Centric Consulting</p>
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0 justify-content-center">
+                        <li>
+                            <a href="@Url.Action("Index", "Home")" class="nav-link px2 text-secondary">Home</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Contact", "Home")" class="nav-link px2 text-white">Contact</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("CoreValues", "Home")" class="nav-link px2 text-white">Core Values</a>
+                        </li>
+                        
+                    </ul>
+
+                    <div class="text-end">
+                        <button type="button" class="btn btn-outline-light me-2">Log In</button>
+                        <button type="button" class="btn btn-primary">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer class="container py-5">
+        <div class="d-flex justify-content-between py-4 my-4 border-top">
+
+            <small class="d-block mb-3 text-muted">&copy; @DateTime.Now.Year Centric Consulting</small>
+
+            <ul class="list-unstyled d-flex">
+                <li class="ms-3">
+                    <a class="link-dark" href="https://twitter.com/centric">
+                        <svg class="bi" width="24" height="24">
+                            <use xlink:href="#twitter"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="link-dark" href="https://www.instagram.com/centricconsulting/">
+                        <svg class="bi" width="24" height="24">
+                            <use xlink:href="#instagram"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="link-dark" href="https://www.facebook.com/CentricConsultingNational/">
+                        <svg class="bi" width="24" height="24">
+                            <use xlink:href="#facebook"></use>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </footer>
-  </main>
 
-  @Scripts.Render("~/bundles/jquery")
-  @Scripts.Render("~/bundles/bootstrap")
-  @RenderSection("scripts", required: false)
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
