@@ -11,75 +11,85 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="bg-light">
-    <header>
-        <div class="p-2 bg-dark text-white fixed-top">
-            <div class="container">
-                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <a href="@Url.Action("Index", "Home", new { area = "" })" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                        <span class="fs-4 bi me-4">eCentric</span>
-                    </a>
+  <header>
+    <div class="p-2 bg-dark text-white fixed-top">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="@Url.Action("Index", "Home", new { area = "" })" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <span class="fs-4 bi me-4">eCentric</span>
+          </a>
 
-                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0 justify-content-center">
-                        <li>
-                            <a href="@Url.Action("Index", "Home")" class="nav-link px2 text-secondary">Home</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Contact", "Home")" class="nav-link px2 text-white">Contact</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("CoreValues", "Home")" class="nav-link px2 text-white">Core Values</a>
-                        </li>
-                        
-                    </ul>
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0 justify-content-center">
+            <li>
+              <a href="@Url.Action("Index", "Home")" class="nav-link px2 text-white">Home</a>
+            </li>
+            <li>
+              <a href="@Url.Action("Contact", "Home")" class="nav-link px2 text-white">Contact</a>
+            </li>
+            <li>
+              <a href="@Url.Action("CoreValues", "Home")" class="nav-link px2 text-white">Core Values</a>
+            </li>
+            <li class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown1" data-bs-toggle="dropdown" aria-expanded="false">Employees</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown1">
+                <li>
+                  <a class="nav-link dropdown-item" href="@Url.Action("Create", "Kudos")">Send Kudos</a>
+                </li>
+                <li>
+                  <a class="nav-link dropdown-item" href="@Url.Action("Leaderboard", "Kudos")">Kudos Leaderboard</a>
+                </li>
+                <li>
+                  <a class="nav-link dropdown-item" href="@Url.Action("Index", "Employees")">Employees List</a>
+                </li>
+                <li>
+                  <a class="nav-link dropdown-item" href="@Url.Action("Index", "Kudos")">Kudos List</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
 
-                    <div class="text-end">
-                        <button type="button" class="btn btn-outline-light me-2">Log In</button>
-                        <button type="button" class="btn btn-primary">Sign Up</button>
-                    </div>
-                </div>
-            </div>
+          @Html.Partial("_LoginPartial")
         </div>
-    </header>
+      </div>
+    </div>
+  </header>
 
-    <main>
-        @RenderBody()
-    </main>
+  <main class="container my-5">
+    @RenderBody()
+  </main>
 
-    <footer class="container py-5">
-        <div class="d-flex justify-content-between py-4 my-4 border-top">
+  <footer class="container py-5">
+    <div class="d-flex justify-content-between py-4 my-4 border-top">
 
-            <small class="d-block mb-3 text-muted">&copy; @DateTime.Now.Year Centric Consulting</small>
+      <small class="d-block mb-3 text-muted">&copy; @DateTime.Now.Year Centric Consulting</small>
 
-            <ul class="list-unstyled d-flex">
-                <li class="ms-3">
-                    <a class="link-dark" href="https://twitter.com/centric">
-                        <svg class="bi" width="24" height="24">
-                            <use xlink:href="#twitter"></use>
-                        </svg>
-                    </a>
-                </li>
-                <li class="ms-3">
-                    <a class="link-dark" href="https://www.instagram.com/centricconsulting/">
-                        <svg class="bi" width="24" height="24">
-                            <use xlink:href="#instagram"></use>
-                        </svg>
-                    </a>
-                </li>
-                <li class="ms-3">
-                    <a class="link-dark" href="https://www.facebook.com/CentricConsultingNational/">
-                        <svg class="bi" width="24" height="24">
-                            <use xlink:href="#facebook"></use>
-                        </svg>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+      <ul class="list-unstyled d-flex">
+        <li class="ms-3">
+          <a class="link-dark" href="https://twitter.com/centric">
+            <i class="bi fa fa-3x fa-twitter"></i>
+          </a>
+        </li>
+        <li class="ms-3">
+          <a class="link-dark" href="https://www.instagram.com/centricconsulting/">
+            <i class="bi fa fa-3x fa-instagram"></i>
+          </a>
+        </li>
+        <li class="ms-3">
+          <a class="link-dark" href="https://www.facebook.com/CentricConsultingNational/">
+            <i class="bi fa fa-3x fa-facebook"></i>
+          </a>
+        </li>
+        <li class="ms-3">
+          <a class="link-dark" href="https://www.linkedin.com/company/centric-consulting">
+            <i class="bi fa fa-3x fa-linkedin"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </footer>
 
-
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+  @Scripts.Render("~/bundles/jquery")
+  @Scripts.Render("~/bundles/bootstrap")
+  @RenderSection("scripts", required: false)
 </body>
 </html>
