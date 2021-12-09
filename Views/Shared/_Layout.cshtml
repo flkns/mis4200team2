@@ -31,12 +31,15 @@
             </li>
             <li class="dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown1" data-bs-toggle="dropdown" aria-expanded="false">Employees</a>
-              <ul class="dropdown-menu" aria-labelledby="dropdown1">
+              <ul class="dropdown-menu dropdown-menu-macos mx-0 border-0 shadow" aria-labelledby="dropdown1">
                 <li>
                   <a class="nav-link dropdown-item" href="@Url.Action("Create", "Kudos")">Send Kudos</a>
                 </li>
                 <li>
                   <a class="nav-link dropdown-item" href="@Url.Action("Leaderboard", "Kudos")">Kudos Leaderboard</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider"/>
                 </li>
                 <li>
                   <a class="nav-link dropdown-item" href="@Url.Action("Index", "Employees")">Employees List</a>
