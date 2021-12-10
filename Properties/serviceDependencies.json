@@ -2,7 +2,9 @@
   "dependencies": {
     "mssql1": {
       "type": "mssql",
-      "connectionId": "ConnectionStrings:DefaultConnection"
+      "connectionId": "",
+      "suggestion": "true",
+      "ignored": "true"
     }
   }
 }

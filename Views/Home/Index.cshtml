@@ -2,33 +2,44 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>eCentric</h1>
-    <p class="lead">Centric Consulting guides in the search for answers to complex digital, business and technology problems by asking tough questions, leading crucial conversations and blending our experts with yours.</p>
-    <p><a href="https://centricconsulting.com/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div class="container">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+        <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+            <h1 class="display-4 fw-bold lh-1">
+                eCentric
+            </h1>
+            <p class="lead">Centric Consulting guides in the search for answers to complex digital, business and technology problems by asking tough questions, leading crucial conversations and blending our experts with yours.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                <input type="button" class="btn btn-outline-primary btn-lg px-4 me-md-4" onclick="location.href='https://centricconsulting.com/'" value="Learn More &raquo;" />
+            </div>
+        </div>
+        <div class="col-lg-4 p-0 overflow-hidden shadow-lg">
+          <div class="ratio ratio-16x9">
+
+            <iframe loading="lazy" src="https://www.youtube.com/embed/jUkBUTI6GfE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+        </div>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Getting started</h2>
-        <p>
-            Together we evolve and transform your business from the people to the processes.
-        </p>
-        <p><a class="btn btn-default" style="background-color:#ffb612" href="https://centricconsulting.com/business-consulting/">Business Consulting &raquo;</a></p>
-    </div>
-    <div class="col-md-3">
-        <h2>Technology</h2>
-        <p>Together we plan, build and deliver technology to solve your business challenges.</p>
-        <p><a class="btn btn-default" style="background-color:#ffb612" href="https://centricconsulting.com/technology-solutions/">Technology Solutions &raquo;</a></p>
-    </div>
-    <div class="col-md-3">
-        <h2>Digital</h2>
-        <p>Together we define your digital strategy, design your customer experience and make marketing work.</p>
-        <p><a class="btn btn-default" style="background-color:#ffb612" href="https://centricconsulting.com/digital-consulting-services/">Digital Consulting &raquo;</a></p>
-    </div>
-    <div class="col-md-3">
-        <h2>Industries</h2>
-        <p>We bring industry expertise to solve your business and technology needs.</p>
-        <p><a class="btn btn-default" style="background-color:#ffb612" href="https://centricconsulting.com/industries/">Industries &raquo;</a></p>
+<div class="container px-4 py-5">
+    <div class="row">
+      <div class="col-lg-3">
+        <input type="button" class="btn btn-primary btn-lg" onclick="location.href='https://centricconsulting.com/business-consulting/'" value="Business Consulting &raquo;" />
+        <p class="my-2">Together we evolve and transform your business from the people to the processes.</p>
+      </div>
+        <div class="col-lg-3">
+          <input type="button" class="btn btn-primary btn-lg" onclick="location.href='https://centricconsulting.com/technology-solutions/'" value="Technology Solutions &raquo;" />
+            <p class="my-2">Together we plan, build and deliver technology to solve your business challenges.</p>            <p></p>
+        </div>
+        <div class="col-lg-3">
+          <input type="button" class="btn btn-primary btn-lg" onclick="location.href='https://centricconsulting.com/digital-consulting-services/'" value="Digital Consulting &raquo;" />
+            <p class="my-2">Together we define your digital strategy, design your customer experience and make marketing work.</p>
+        </div>
+        <div class="col-lg-3">
+          <input type="button" class="btn btn-primary btn-lg" onclick="location.href='https://centricconsulting.com/industries/'" value="Industries &raquo;" />
+          <p class="my-2">We bring the industry expertise to best solve your business and technology needs.</p>
+        </div>
     </div>
 </div>

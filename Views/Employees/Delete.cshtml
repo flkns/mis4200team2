@@ -28,19 +28,35 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisteredDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisteredDate)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.HireDate)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.HireDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BusinessUnit)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BusinessUnit)
         </dd>
 
         <dt>
@@ -51,13 +67,21 @@
             @Html.DisplayFor(model => model.Title)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessUnit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusinessUnit)
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

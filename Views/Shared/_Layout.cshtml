@@ -1,45 +1,98 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title | eCentric</title>
+    <meta name="description" content="Centric Consulting Employee Application">
+    <!-- Add to HTML Head -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("eCentric", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About Us", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year Centric Consulting</p>
-        </footer>
-    </div>
+<body class="bg-light">
+  <header>
+    <div class="p-2 bg-dark text-white fixed-top">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="@Url.Action("Index", "Home", new { area = "" })" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <span class="fs-4 bi me-4">eCentric</span>
+          </a>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0 justify-content-center">
+            <li>
+              <a href="@Url.Action("Index", "Home")" class="nav-link px2 @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "text-white" : "text-muted")">Home</a>
+            </li>
+            <li>
+              <a href="@Url.Action("Contact", "Home")" class="nav-link px2 @(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "text-white" : "text-muted")">Contact</a>
+            </li>
+            <li>
+              <a href="@Url.Action("CoreValues", "Home")" class="nav-link px2 @(ViewContext.RouteData.Values["Action"].ToString() == "CoreValues" ? "text-white" : "text-muted")">Core Values</a>
+            </li>
+            <li class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown1" data-bs-toggle="dropdown" aria-expanded="false">Employees</a>
+              <ul class="dropdown-menu dropdown-menu-macos mx-0 border-0 shadow" aria-labelledby="dropdown1">
+                <li>
+                  <a class="nav-link dropdown-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Kudos" && ViewContext.RouteData.Values["Action"].ToString() == "Create" ? "active" : "")" href="@Url.Action("Create", "Kudos")">Send Kudos</a>
+                </li>
+                <li>
+                  <a class="nav-link dropdown-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Kudos" && ViewContext.RouteData.Values["Action"].ToString() == "Leaderboard" ? "active" : "")" href="@Url.Action("Leaderboard", "Kudos")">Kudos Leaderboard</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a class="nav-link dropdown-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Employees" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")" href="@Url.Action("Index", "Employees")">Employees List</a>
+                </li>
+                <li>
+                  <a class="nav-link dropdown-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Kudos" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")" href="@Url.Action("Index", "Kudos")">Kudos List</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          @Html.Partial("_LoginPartial")
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container my-5">
+    @RenderBody()
+  </main>
+
+  <footer class="container py-5">
+    <div class="d-flex justify-content-between py-4 my-4 border-top">
+
+      <small class="d-block mb-3 text-muted">&copy; @DateTime.Now.Year Centric Consulting</small>
+
+      <ul class="list-unstyled d-flex">
+        <li class="ms-3">
+          <a class="link-dark" href="https://twitter.com/centric">
+            <i class="bi fa fa-3x fa-twitter"></i>
+          </a>
+        </li>
+        <li class="ms-3">
+          <a class="link-dark" href="https://www.instagram.com/centricconsulting/">
+            <i class="bi fa fa-3x fa-instagram"></i>
+          </a>
+        </li>
+        <li class="ms-3">
+          <a class="link-dark" href="https://www.facebook.com/CentricConsultingNational/">
+            <i class="bi fa fa-3x fa-facebook"></i>
+          </a>
+        </li>
+        <li class="ms-3">
+          <a class="link-dark" href="https://www.linkedin.com/company/centric-consulting">
+            <i class="bi fa fa-3x fa-linkedin"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+  @Scripts.Render("~/bundles/jquery")
+  @Scripts.Render("~/bundles/bootstrap")
+  @RenderSection("scripts", required: false)
 </body>
 </html>

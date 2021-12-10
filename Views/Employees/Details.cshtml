@@ -27,19 +27,35 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisteredDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisteredDate)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.HireDate)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.HireDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BusinessUnit)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BusinessUnit)
         </dd>
 
         <dt>
@@ -50,9 +66,17 @@
             @Html.DisplayFor(model => model.Title)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessUnit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusinessUnit)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<mis4200team2.Models.Kudos>
+
+@{
+  ViewBag.Title = "Index";
+}
+
+<h2 class="display-5">Kudos List</h2>
+
+<div class="py-2 w-100">
+<a href="@Url.Action("Create")" class="btn btn-success btn-lg w-100 px-2">Send New Kudos</a>
+</div>
+
+<table class="table table-sm table-striped table-hover">
+  <thead>
+    <tr>
+      <th>
+        Sender Name
+      </th>
+      <th>
+        Receiver Name
+      </th>
+      <th>
+        Send Time
+      </th>
+      <th>
+        Core Values
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    @foreach (var item in Model)
+    {
+      <tr>
+        <td>
+          @Html.DisplayFor(modelItem => item.ReceiverEmployee.FullName)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.SenderEmployee.FullName)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.SendTime)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+          @Html.ActionLink("Edit", "Edit", new { id = item.KudosID }) |
+          @Html.ActionLink("Details", "Details", new { id = item.KudosID }) |
+          @Html.ActionLink("Delete", "Delete", new { id = item.KudosID })
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+
+<div>@Html.ActionLink("Back to Kudos List", "Index")</div>

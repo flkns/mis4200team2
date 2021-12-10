@@ -1,8 +1,20 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.ModelConfiguration.Configuration;
+using System.Data.Entity.Validation;
+using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace mis4200team2.Models
 {
@@ -23,11 +35,16 @@ namespace mis4200team2.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Configuration.LazyLoadingEnabled = false;
         }
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+
+        //public System.Data.Entity.DbSet<mis4200team2.Models.Kudos> Kudos { get; set; }
+
+        //public System.Data.Entity.DbSet<mis4200team2.Models.Employee> Employees { get; set; }
     }
 }
