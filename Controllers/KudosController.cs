@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using mis4200team2.Data;
 using mis4200team2.Models;
+using PagedList;
 
 namespace mis4200team2.Controllers
 {
@@ -24,36 +25,47 @@ namespace mis4200team2.Controllers
       return View(kudosDB.ToList());
     }
 
-    public ActionResult Leaderboard(string sort, string search)
+    public ActionResult Leaderboard(string currentSort, string currentFilter, string searchString, int? page)
     {
-      ViewData["LastNameSort"] = String.IsNullOrEmpty(sort) ? "last_desc" : "";
-      ViewData["ReceiveSort"] = sort == "receive_asc" ? "receive_desc" : "receive_asc";
-      ViewData["CurrentFilter"] = search;
+      ViewBag.ReceiveSort = String.IsNullOrEmpty(currentSort) ? "receive_asc" : "";
+      ViewBag.SentSort = currentSort == "sent_asc" ? "sent_desc" : "sent_asc";
+      ViewBag.CurrentSort = currentSort;
+
+      if (searchString != null)
+      {
+        page = 1;
+      }
+      else { searchString = currentFilter; }
+
+      ViewBag.CurrentFilter = searchString;
 
       var employees = from e in db.Employees select e;
 
-      if (!String.IsNullOrEmpty(search))
+      if (!String.IsNullOrEmpty(searchString))
       {
-        employees = employees.Where(e => e.LastName.Contains(search) || e.FirstName.Contains(search));
+        employees = employees.Where(e => e.FirstName.ToUpper().Contains(searchString.ToUpper()) || e.LastName.ToUpper().Contains(searchString.ToUpper()));
       }
 
-      switch (sort)
+      switch (currentSort)
       {
-        case "last_desc":
-          employees = employees.OrderByDescending(e => e.LastName);
-          break;
         case "receive_asc":
           employees = employees.OrderBy(e => e.ReceivedKudos.Count());
           break;
-        case "receive_desc":
-          employees = employees.OrderByDescending(e => e.ReceivedKudos.Count());
+        case "sent_asc":
+          employees = employees.OrderBy(e => e.SentKudos.Count());
+          break;
+        case "sent_desc":
+          employees = employees.OrderByDescending(e => e.SentKudos.Count());
           break;
         default:
-          employees = employees.OrderBy(e => e.LastName);
+          employees = employees.OrderByDescending(e => e.ReceivedKudos.Count());
           break;
       }
-      //var kudosDB = db.KudosDB.Include(k => k.ReceiverEmployee).Include(k => k.SenderEmployee);
-      return View(employees.AsNoTracking().ToList());
+
+      int pageSize = 15;
+      int pageNumber = (page ?? 1);
+
+      return View(employees.AsNoTracking().ToPagedList(pageNumber, pageSize));
     }
 
     // GET: Kudos/Details/5
@@ -105,10 +117,10 @@ namespace mis4200team2.Controllers
         kudos.SenderID = currentEmployeeID;
         kudos.SendTime = DateTime.Now;
 
-        if((kudos.ReceiverEmployee.GetType() == null) || (kudos.ReceiverEmployee == null))
+        if ((kudos.ReceiverEmployee.GetType() == null) || (kudos.ReceiverEmployee == null))
         {
-            ViewBag.Error = "You cannot send kudos to no one!";
-            return View("Error");
+          ViewBag.Error = "You cannot send kudos to no one!";
+          return View("Error");
         }
 
         if ((kudos.SenderID == kudos.ReceiverID) || (kudos.SenderEmployee == kudos.ReceiverEmployee))

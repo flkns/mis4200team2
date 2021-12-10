@@ -21,31 +21,31 @@
 
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0 justify-content-center">
             <li>
-              <a href="@Url.Action("Index", "Home")" class="nav-link px2 text-white">Home</a>
+              <a href="@Url.Action("Index", "Home")" class="nav-link px2 @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "text-white" : "text-muted")">Home</a>
             </li>
             <li>
-              <a href="@Url.Action("Contact", "Home")" class="nav-link px2 text-white">Contact</a>
+              <a href="@Url.Action("Contact", "Home")" class="nav-link px2 @(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "text-white" : "text-muted")">Contact</a>
             </li>
             <li>
-              <a href="@Url.Action("CoreValues", "Home")" class="nav-link px2 text-white">Core Values</a>
+              <a href="@Url.Action("CoreValues", "Home")" class="nav-link px2 @(ViewContext.RouteData.Values["Action"].ToString() == "CoreValues" ? "text-white" : "text-muted")">Core Values</a>
             </li>
             <li class="dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown1" data-bs-toggle="dropdown" aria-expanded="false">Employees</a>
               <ul class="dropdown-menu dropdown-menu-macos mx-0 border-0 shadow" aria-labelledby="dropdown1">
                 <li>
-                  <a class="nav-link dropdown-item" href="@Url.Action("Create", "Kudos")">Send Kudos</a>
+                  <a class="nav-link dropdown-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Kudos" && ViewContext.RouteData.Values["Action"].ToString() == "Create" ? "active" : "")" href="@Url.Action("Create", "Kudos")">Send Kudos</a>
                 </li>
                 <li>
-                  <a class="nav-link dropdown-item" href="@Url.Action("Leaderboard", "Kudos")">Kudos Leaderboard</a>
+                  <a class="nav-link dropdown-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Kudos" && ViewContext.RouteData.Values["Action"].ToString() == "Leaderboard" ? "active" : "")" href="@Url.Action("Leaderboard", "Kudos")">Kudos Leaderboard</a>
                 </li>
                 <li>
-                  <hr class="dropdown-divider"/>
+                  <hr class="dropdown-divider" />
                 </li>
                 <li>
-                  <a class="nav-link dropdown-item" href="@Url.Action("Index", "Employees")">Employees List</a>
+                  <a class="nav-link dropdown-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Employees" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")" href="@Url.Action("Index", "Employees")">Employees List</a>
                 </li>
                 <li>
-                  <a class="nav-link dropdown-item" href="@Url.Action("Index", "Kudos")">Kudos List</a>
+                  <a class="nav-link dropdown-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Kudos" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")" href="@Url.Action("Index", "Kudos")">Kudos List</a>
                 </li>
               </ul>
             </li>

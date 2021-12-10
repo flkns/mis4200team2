@@ -25,6 +25,8 @@ namespace mis4200team2
             bundles.Add(new Bundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/Site.css"));
+
+      bundles.Add(new Bundle("~/Content/PagedList").Include("~/Content/PagedList.css"));
         }
     }
 }
